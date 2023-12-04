@@ -1,0 +1,19 @@
+<h2 class="text-3xl">Posts</h2>
+<% @blog_posts.each do |post| %>
+  <div>
+    <h2>
+      <%= link_to post.title, blog_post_path(post.id), class: "hover:no-underline" %>
+    </h2>
+    <p><%= post.body %></p>
+    <% if user_signed_in? %>
+      <hr>
+      <div>
+        <h3>Post Controls</h3>
+        <p>
+          <%= link_to 'Edit', edit_blog_post_path(post.id) %>
+          <%= button_to 'Delete', blog_post_path(post.id), method: :delete, data: {turbo_confirm: "Are you sure?"} %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+<% end %>
